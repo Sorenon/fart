@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "test",
+  "version": "1.0.0",
+
+  "name": "Test Mod",
+  "description": "This is an example description! Tell everyone what your mod is about!",
+  "authors": [
+    "Sorenon"
+  ],
+  "contact": {
+    "homepage": "https:fabricmc.net/",
+    "sources": "https:github.com/FabricMC/fabric-example-mod"
+  },
+
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "net.fabricmc.testmod.TestMod"
+    ]
+  },
+
+  "depends": {
+    "fabricloader": ">=0.11.3",
+    "minecraft": "1.17.x",
+    "java": ">=16"
+  }
+}
