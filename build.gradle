@@ -12,10 +12,6 @@ version = project.mod_version
 group = project.maven_group
 
 repositories {
-    flatDir {
-        dirs 'libs'
-    }
-    // where grondag's mods live
     maven {
         name = "dblsaiko"
         url = "https://maven.dblsaiko.net/"
@@ -24,10 +20,12 @@ repositories {
         name = "Cotton"
         url = "https://server.bbkr.space/artifactory/libs-release/"
     }
-    // REI, odds and ends
     maven {
         name = "CurseForge"
         url = "https://minecraft.curseforge.com/api/maven"
+    }
+    maven {
+        url "https://cursemaven.com"
     }
     maven { url "https://maven.shedaniel.me/" }
 }
@@ -45,7 +43,7 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
     testmodImplementation sourceSets.main.output
 
-    modCompileOnly(name: "iris")
+    modCompileOnly("curse.maven:irisshaders-455508:3404785")
     modCompileOnly("grondag:canvas-mc117-1.17:1.0.+")
 }
 
