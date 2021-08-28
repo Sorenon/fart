@@ -19,39 +19,39 @@ public class FartRenderEvents {
 
     @Environment(EnvType.CLIENT)
     @FunctionalInterface
-    public interface ZhuLi {
-        void doTheThing(WorldRenderContext context);
+    public interface FartRenderEvent {
+        void run(WorldRenderContext context);
     }
 
-    public static final Event<ZhuLi> BEFORE_BLOCK_OUTLINE = EventFactory.createArrayBacked(ZhuLi.class, context -> {
+    public static final Event<FartRenderEvent> BEFORE_BLOCK_OUTLINE = EventFactory.createArrayBacked(FartRenderEvent.class, context -> {
     }, callbacks -> context -> {
-        for (final ZhuLi callback : callbacks) {
-            callback.doTheThing(context);
+        for (final FartRenderEvent callback : callbacks) {
+            callback.run(context);
         }
     });
 
-    public static final Event<ZhuLi> AFTER_TRANSLUCENT = EventFactory.createArrayBacked(ZhuLi.class, context -> {
+    public static final Event<FartRenderEvent> AFTER_TRANSLUCENT = EventFactory.createArrayBacked(FartRenderEvent.class, context -> {
     }, callbacks -> context -> {
-        for (final ZhuLi callback : callbacks) {
-            callback.doTheThing(context);
+        for (final FartRenderEvent callback : callbacks) {
+            callback.run(context);
         }
     });
 
-    public static final Event<ZhuLi> LAST = EventFactory.createArrayBacked(ZhuLi.class, context -> {
+    public static final Event<FartRenderEvent> LAST = EventFactory.createArrayBacked(FartRenderEvent.class, context -> {
     }, callbacks -> context -> {
-        for (final ZhuLi callback : callbacks) {
-            callback.doTheThing(context);
+        for (final FartRenderEvent callback : callbacks) {
+            callback.run(context);
         }
     });
 
-    private static void canvasFixPre(MatrixStack stack) {
+    public static void canvasFixPre(MatrixStack stack) {
         if (CANVAS) {
             stack.push();
             stack.loadIdentity();
         }
     }
 
-    private static void canvasFixPost(MatrixStack stack) {
+    public static void canvasFixPost(MatrixStack stack) {
         if (CANVAS) {
             stack.pop();
         }
@@ -60,28 +60,29 @@ public class FartRenderEvents {
     static {
         WorldRenderEvents.BEFORE_BLOCK_OUTLINE.register((context, hitResult) -> {
             canvasFixPre(context.matrixStack());
-            BEFORE_BLOCK_OUTLINE.invoker().doTheThing(context);
+            BEFORE_BLOCK_OUTLINE.invoker().run(context);
             canvasFixPost(context.matrixStack());
             return true;
         });
         WorldRenderEvents.AFTER_TRANSLUCENT.register((context) -> {
             canvasFixPre(context.matrixStack());
             GlStateManager._disableDepthTest();
-            AFTER_TRANSLUCENT.invoker().doTheThing(context);
+            AFTER_TRANSLUCENT.invoker().run(context);
             ((VertexConsumerProvider.Immediate) context.consumers()).draw();
             canvasFixPost(context.matrixStack());
         });
         WorldRenderEvents.LAST.register((context) -> {
-            canvasFixPre(context.matrixStack());
+//            canvasFixPre(context.matrixStack());
             MatrixStack poseStack = RenderSystem.getModelViewStack();
             poseStack.push();
             poseStack.loadIdentity();
             RenderSystem.applyModelViewMatrix();
             GlStateManager._disableDepthTest();
-            LAST.invoker().doTheThing(context);
+            LAST.invoker().run(context);
             ((VertexConsumerProvider.Immediate) context.consumers()).draw();
             poseStack.pop();
-            canvasFixPost(context.matrixStack());
+            RenderSystem.applyModelViewMatrix();
+//            canvasFixPost(context.matrixStack());
         });
     }
 }

@@ -1,6 +1,8 @@
 package net.sorenon.fart;
 
+import java.util.OptionalDouble;
 import java.util.function.Supplier;
+
 import net.minecraft.client.render.RenderPhase;
 import net.minecraft.client.render.Shader;
 import net.minecraft.util.Identifier;
@@ -44,11 +46,18 @@ public class RenderStateShards {
     public static final RenderPhase.Target ITEM_ENTITY_TARGET = RenderPhase.ITEM_TARGET;
     public static final RenderPhase.LineWidth DEFAULT_LINE = RenderPhase.FULL_LINE_WIDTH;
 
+    //Custom
+    public static final RenderPhase.LineWidth AUTO_LINE = new RenderPhase.LineWidth(OptionalDouble.empty());
+
     public static RenderPhase.Shader shader(Supplier<Shader> supplier) {
         return new RenderPhase.Shader(supplier);
     }
 
     public static RenderPhase.Texture texture(Identifier resourceLocation, boolean blur, boolean mipmap) {
         return new RenderPhase.Texture(resourceLocation, blur, mipmap);
+    }
+
+    public static RenderPhase.LineWidth lineWidth(double lineWidth) {
+        return new RenderPhase.LineWidth(OptionalDouble.of(lineWidth));
     }
 }

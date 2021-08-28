@@ -2,6 +2,7 @@ package net.sorenon.fart;
 
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexFormat;
+import net.minecraft.util.Identifier;
 
 public class RenderTypeBuilder {
 
@@ -14,8 +15,8 @@ public class RenderTypeBuilder {
 
     public final RenderLayer.MultiPhaseParameters.Builder innerBuilder;
 
-    public RenderTypeBuilder(String name, VertexFormat format, VertexFormat.DrawMode drawMode, int expectedBufferSize, boolean affectsCrumbling, boolean sortOnUpload) {
-        this.name = name;
+    public RenderTypeBuilder(Identifier name, VertexFormat format, VertexFormat.DrawMode drawMode, int expectedBufferSize, boolean affectsCrumbling, boolean sortOnUpload) {
+        this.name = "fart_" + name.toString();
         this.format = format;
         this.drawMode = drawMode;
         this.expectedBufferSize = expectedBufferSize;
@@ -25,14 +26,14 @@ public class RenderTypeBuilder {
     }
 
     public RenderLayer.MultiPhase build(boolean affectsOutline) {
-        return create(name, format, drawMode, expectedBufferSize, affectsCrumbling, sortOnUpload, innerBuilder.build(affectsOutline));
+        return createInner(name, format, drawMode, expectedBufferSize, affectsCrumbling, sortOnUpload, innerBuilder.build(affectsOutline));
     }
 
-    public static RenderLayer.MultiPhaseParameters.Builder makeBuilder() {
+    public static RenderLayer.MultiPhaseParameters.Builder makeInnerBuilder() {
         return RenderLayer.MultiPhaseParameters.builder();
     }
 
-    public static RenderLayer.MultiPhase create(String name, VertexFormat format, VertexFormat.DrawMode drawMode, int expectedBufferSize, boolean affectsCrumbling, boolean sortOnUpload, RenderLayer.MultiPhaseParameters compositeState) {
+    public static RenderLayer.MultiPhase createInner(String name, VertexFormat format, VertexFormat.DrawMode drawMode, int expectedBufferSize, boolean affectsCrumbling, boolean sortOnUpload, RenderLayer.MultiPhaseParameters compositeState) {
         return RenderLayer.of(name, format, drawMode, expectedBufferSize, affectsCrumbling, sortOnUpload, compositeState);
     }
 }
