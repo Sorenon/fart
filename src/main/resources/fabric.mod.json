@@ -1,28 +1,22 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "fart",
   "version": "${version}",
-
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "FART",
+  "description": "Fabric Abstracted Rendering Tools",
   "authors": [
     "Sorenon"
   ],
   "contact": {
-    "homepage": "https:fabricmc.net/",
-    "sources": "https:github.com/FabricMC/fabric-example-mod"
+    "sources": "https://github.com/Sorenon/fart"
   },
-
   "license": "MIT",
-  "icon": "assets/modid/icon.png",
-  "accessWidener": "modid.accesswidener",
+  "icon": "assets/fart/icon.png",
+  "accessWidener": "fart.accesswidener",
   "environment": "client",
   "depends": {
     "fabricloader": ">=0.11.3",
     "minecraft": "1.17.x",
     "java": ">=16"
-  },
-  "suggests": {
-    "another-mod": "*"
   }
 }

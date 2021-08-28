@@ -39,14 +39,14 @@ configurations {
 dependencies {
     // To change the versions see the gradle.properties file
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings loom.officialMojangMappings()
+    mappings "net.fabricmc:yarn:1.17.1+build.23:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
     testmodImplementation sourceSets.main.output
 
     modCompileOnly(name: "iris")
-//    modImplementation("grondag:canvas-mc117-1.17:1.0.+") Loom :|
+    modCompileOnly("grondag:canvas-mc117-1.17:1.0.+")
 }
 
 sourceSets {
@@ -58,7 +58,7 @@ sourceSets {
 
 loom {
     //noinspection GroovyAssignabilityCheck
-    accessWidenerPath = file("src/main/resources/modid.accesswidener")
+    accessWidenerPath = file("src/main/resources/fart.accesswidener")
 
     runs {
         testmodClient {
