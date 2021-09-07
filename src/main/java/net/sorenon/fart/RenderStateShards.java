@@ -49,6 +49,10 @@ public class RenderStateShards {
     //Custom
     public static final RenderPhase.LineWidth AUTO_LINE = new RenderPhase.LineWidth(OptionalDouble.empty());
 
+    public static RenderPhase.DepthTest depthTest(String name, int depthFunction) {
+        return new RenderPhase.DepthTest(name, depthFunction);
+    }
+
     public static RenderPhase.Shader shader(Supplier<Shader> supplier) {
         return new RenderPhase.Shader(supplier);
     }
