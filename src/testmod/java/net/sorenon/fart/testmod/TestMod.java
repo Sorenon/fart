@@ -42,7 +42,7 @@ public class TestMod implements ClientModInitializer {
         stack.translate(-camPos.x, -camPos.y, -camPos.z);
         stack.translate(x, y, z);
 
-        Matrix4f matrix4f = stack.peek().getModel();
+        Matrix4f matrix4f = stack.peek().getPositionMatrix();
 
         consumer.vertex(matrix4f, 0, 0, 0).color(0f, 0f, 0f, 1f).normal(0, -1, 0).next();
         consumer.vertex(matrix4f, 0, -1, 0).color(0f, 0f, 0f, 1f).normal(0, -1, 0).next();
@@ -90,8 +90,8 @@ public class TestMod implements ClientModInitializer {
 
         assert consumers != null;
         VertexConsumer consumer = consumers.getBuffer(ENTITY_CUTOUT_ALWAYS.apply(MissingSprite.getMissingSpriteId()));
-        Matrix4f modelMatrix = stack.peek().getModel();
-        Matrix3f normalMatrix = stack.peek().getNormal();
+        Matrix4f modelMatrix = stack.peek().getPositionMatrix();
+        Matrix3f normalMatrix = stack.peek().getNormalMatrix();
         consumer.vertex(modelMatrix, 0, 1, 0).color(255, 255, 255, 255).texture(1, 1).overlay(OverlayTexture.DEFAULT_UV).light(15728880).normal(normalMatrix, 0, 0, -1).next();
         consumer.vertex(modelMatrix, 1, 1, 0).color(255, 255, 255, 255).texture(0, 1).overlay(OverlayTexture.DEFAULT_UV).light(15728880).normal(normalMatrix, 0, 0, -1).next();
         consumer.vertex(modelMatrix, 1, 0, 0).color(255, 255, 255, 255).texture(0, 0).overlay(OverlayTexture.DEFAULT_UV).light(15728880).normal(normalMatrix, 0, 0, -1).next();

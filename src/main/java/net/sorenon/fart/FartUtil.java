@@ -17,8 +17,8 @@ public class FartUtil {
     }
 
     public static void renderCrosshair(VertexConsumerProvider consumerProvider, MatrixStack poseStack, float size, boolean depthTest, boolean drawX, boolean drawY, boolean drawZ) {
-        Matrix4f model = poseStack.peek().getModel();
-        Matrix3f normal = poseStack.peek().getNormal();
+        Matrix4f model = poseStack.peek().getPositionMatrix();
+        Matrix3f normal = poseStack.peek().getNormalMatrix() ;
 
         VertexConsumer consumer = consumerProvider.getBuffer(LINE_COLOR_ONLY.apply(4d, depthTest));
         if (drawX) {
